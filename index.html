@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ForgeCPP</title>
+
+<!-- Marked.js for Markdown rendering -->
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+<style>
+  /* ===== Base ===== */
+  * { box-sizing: border-box; margin:0; padding:0; }
+  body {
+    font-family: system-ui, -apple-system, Segoe UI, sans-serif;
+    background: #0b0f1a;
+    color: #e5e7eb;
+    overflow-y: overlay;
+  }
+  .container { max-width: 1000px; margin: auto; padding: 40px 20px 80px; }
+  h1 { display:flex; align-items:center; justify-content:center; gap:10px; font-size:2.6rem; color:#38bdf8; margin-bottom:10px; }
+  .subtitle { text-align:center; color:#cbd5f5; margin-bottom:50px; font-size:1.1rem; }
+
+  /* ===== Phase Cards ===== */
+  .phase {
+    background: #111827;
+    border-radius: 18px;
+    padding: 28px;
+    margin-bottom: 40px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .phase:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 30px rgba(0, 200, 255, 0.4);
+  }
+  .phase h2 { color: #22d3ee; font-size: 1.5rem; margin-bottom: 18px; }
+  .topics {
+    list-style: disc;
+    padding-left: 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 6px 24px;
+    margin-bottom: 22px;
+  }
+  .topics li { color: #e5e7eb; }
+  .checkpoint { display: flex; align-items: center; gap: 12px; padding-top: 18px; border-top: 1px dashed #334155; }
+  .checkpoint input { transform: scale(1.4); accent-color: #22c55e; cursor:pointer; }
+  .checkpoint a {
+    color:#22c55e;
+    font-weight:600;
+    text-decoration:none;
+    transition: color 0.3s ease;
+  }
+  .checkpoint a:hover { color: #38bdf8; }
+
+  /* ===== Markdown Modal ===== */
+  #md-modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.85);
+    backdrop-filter: blur(4px);
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    padding: 40px 20px;
+    overflow-y: auto;
+  }
+  #md-content {
+    background: #111827;
+    width: 100%;
+    max-width: 1300px;
+    max-height: 95%;
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: 0 12px 40px rgba(0,200,255,0.4);
+    overflow-y: auto;
+    overflow-x: auto;
+    animation: modalFadeIn 0.3s ease forwards;
+  }
+
+  /* Markdown styling */
+#md-content h1 { color: #25f594; margin-bottom: 12px; } /* bright cyan for H1 */
+#md-content h1.final-project { color: #fcd34d; margin-bottom: 12px; }
+#md-content h2 { 
+    color: #7dd3fc;              /* lighter cyan for H2 text */
+    margin-bottom: 12px;
+    padding-bottom: 4px;
+    border-bottom: 2px solid #25f594; /* green underline for nice contrast */
+}
+#md-content h3 { color: #22d3ee; margin-bottom: 12px; } /* turquoise */
+
+
+  #md-content h4, #md-content h5, #md-content h6 {
+    color: #22d3ee;
+    margin-bottom: 10px;
+  }
+  #md-content p { color: #cbd5f5; margin-bottom: 12px; white-space: pre-wrap; }
+  #md-content ul, #md-content ol { padding-left: 20px; margin-bottom: 12px; }
+  #md-content li { margin: 4px 0; }
+  #md-content table { width:100%; border-collapse: collapse; margin-bottom: 18px; }
+  #md-content th, #md-content td { border:1px solid #334155; padding:8px 12px; }
+  #md-content th { background:#1e293b; color:#22d3ee; }
+  #md-content code { background:#1e293b; padding:2px 6px; border-radius:4px; }
+  #md-content pre { background:#1f2937; padding:12px; border-radius:8px; overflow:auto; }
+  #md-content.final-project { transition: transform 0.3s ease, box-shadow 0.3s ease; cursor: default; }
+  #md-content.final-project:hover { transform: translateY(-6px); box-shadow: 0 12px 30px rgba(250,204,21,0.4); }
+
+  /* Scrollbars */
+  body::-webkit-scrollbar { width:8px; }
+  body::-webkit-scrollbar-track { background:#0b0f1a; }
+  body::-webkit-scrollbar-thumb { background:#22d3ee; border-radius:4px; }
+  #md-content::-webkit-scrollbar { width:6px; }
+  #md-content::-webkit-scrollbar-track { background:#111827; }
+  #md-content::-webkit-scrollbar-thumb { background:#38bdf8; border-radius:3px; }
+
+  /* Animation */
+  @keyframes modalFadeIn {
+    from { opacity:0; transform: translateY(-15px); }
+    to { opacity:1; transform: translateY(0); }
+  }
+</style>
+</head>
+
+<body>
+<div class="container">
+
+<h1>
+  <img src="./img/ISO_C++_Logo.svg" alt="C++ Logo" style="width:60px; height:60px;">
+  ForgeCPP
+</h1>
+<p class="subtitle">A concise roadmap to level up your C++ skills.</p>
+
+<!-- Example Phase -->
+<section class="phase">
+  <h2>🔹 Phase 1: C++ Basics</h2>
+  <ul class="topics">
+    <li>C++ HOME</li><li>C++ Intro</li><li>C++ Get Started</li>
+    <li>C++ Syntax</li><li>C++ Output</li><li>C++ Comments</li>
+    <li>C++ Variables</li><li>C++ User Input</li><li>C++ Data Types</li>
+    <li>C++ Operators</li><li>C++ Strings</li><li>C++ Math</li>
+    <li>C++ Booleans</li><li>C++ If...Else</li><li>C++ Switch</li>
+    <li>C++ While</li><li>C++ For</li><li>C++ Break/Continue</li>
+  </ul>
+  <div class="checkpoint">
+    <input type="checkbox" id="c1">
+    <label for="c1">
+      <a href="#" class="load-md" data-md="0xchk/0xC001.md">🔥 Forge Your Foundation</a>
+    </label>
+  </div>
+</section>
+
+<!-- Phase 2 -->
+<section class="phase">
+  <h2>🔹 Phase 2: Memory & Core Features</h2>
+  <ul class="topics">
+    <li>C++ Arrays</li>
+    <li>C++ Structures</li>
+    <li>C++ Enums</li>
+    <li>C++ References</li>
+    <li>C++ Pointers</li>
+    <li>C++ Memory Management</li>
+  </ul>
+  <div class="checkpoint">
+    <input type="checkbox" id="c2">
+    <label for="c2">
+      <a href="#" class="load-md" data-md="0xchk/0xC002.md">🛠️ Master the Core</a>
+    </label>
+  </div>
+</section>
+
+<!-- Phase 3 -->
+<section class="phase">
+  <h2>🔹 Phase 3: Functions</h2>
+  <ul class="topics">
+    <li>Functions</li>
+    <li>Parameters</li>
+    <li>Overloading</li>
+    <li>Scope</li>
+    <li>Recursion</li>
+    <li>Lambda Expressions</li>
+  </ul>
+  <div class="checkpoint">
+    <input type="checkbox" id="c3">
+    <label for="c3">
+      <a href="#" class="load-md" data-md="0xchk/0xC003.md">⚡ Command the Flow</a>
+    </label>
+  </div>
+</section>
+
+<!-- Phase 4 -->
+<section class="phase">
+  <h2>🔹 Phase 4: OOP</h2>
+  <ul class="topics">
+    <li>Classes</li>
+    <li>Constructors</li>
+    <li>Access Specifiers</li>
+    <li>Inheritance</li>
+    <li>Polymorphism</li>
+    <li>Templates</li>
+  </ul>
+  <div class="checkpoint">
+    <input type="checkbox" id="c4">
+    <label for="c4">
+      <a href="#" class="load-md" data-md="0xchk/0xC004.md">🧱 Build Your Classes</a>
+    </label>
+  </div>
+</section>
+
+<!-- Phase 5 -->
+<section class="phase">
+  <h2>🔹 Phase 5: Errors & Safety</h2>
+  <ul class="topics">
+    <li>Errors</li>
+    <li>Debugging</li>
+    <li>Exceptions</li>
+  </ul>
+  <div class="checkpoint">
+    <input type="checkbox" id="c5">
+    <label for="c5">
+      <a href="#" class="load-md" data-md="0xchk/0xC005.md">🛡️ Guard Against Errors</a>
+    </label>
+  </div>
+</section>
+
+<!-- Phase 6 -->
+<section class="phase">
+  <h2>🔹 Phase 6: STL</h2>
+  <ul class="topics">
+    <li>Vectors</li>
+    <li>Lists</li>
+    <li>Stacks</li>
+    <li>Queues</li>
+    <li>Maps</li>
+    <li>Algorithms</li>
+  </ul>
+  <div class="checkpoint">
+    <input type="checkbox" id="c6">
+    <label for="c6">
+      <a href="#" class="load-md" data-md="0xchk/0xC006.md">📦 Harness the Toolbox</a>
+    </label>
+  </div>
+</section>
+
+<!-- Phase 7 -->
+<section class="phase">
+  <h2>🔹 Phase 7: Code Organization</h2>
+  <ul class="topics">
+    <li>Namespaces</li>
+  </ul>
+  <div class="checkpoint">
+    <input type="checkbox" id="c7">
+    <label for="c7">
+      <a href="#" class="load-md" data-md="0xchk/0xC007.md">🗂️ Structure Your Code</a>
+    </label>
+  </div>
+</section>
+
+<!-- Final Project -->
+<section class="phase" style="border: 2px solid #facc15; box-shadow: 0 12px 30px rgba(250,204,21,0.4);">
+  <h2>🏗️ Final Project</h2>
+  <p style="color:#fcd34d; margin-bottom:18px;">
+    Apply everything you learned by building a complete C++ project.
+  </p>
+  <ul class="topics">
+    <li>Plan the project structure</li>
+    <li>Implement core features</li>
+    <li>Use OOP and STL concepts</li>
+    <li>Handle errors and edge cases</li>
+    <li>Document your code</li>
+  </ul>
+  <div class="checkpoint">
+    <input type="checkbox" id="c8">
+    <label for="c8">
+      <a href="#" class="load-md" data-md="0xchk/0xProject.md">🚀 Launch Your Project</a>
+    </label>
+  </div>
+</section>
+
+</div>
+
+<!-- Markdown Modal -->
+<div id="md-modal">
+  <!-- <span id="md-close">&times;</span> -->
+  <div id="md-content">Loading...</div>
+</div>
+
+<script>
+  // ✅ Persist checkbox state
+  document.querySelectorAll("input[type=checkbox]").forEach(cb => {
+    cb.checked = localStorage.getItem(cb.id) === "true";
+    cb.addEventListener("change", () => {
+      localStorage.setItem(cb.id, cb.checked);
+    });
+  });
+
+  const modal = document.getElementById('md-modal');
+  const mdContent = document.getElementById('md-content');
+
+  async function loadMarkdown(url) {
+    try {
+      const res = await fetch(url);
+      if (!res.ok) throw new Error("File not found");
+      const text = await res.text();
+
+      // Determine if it's the Final Project file
+      const isFinalProject = url.includes("0xProject.md");
+
+      // Render markdown
+      mdContent.innerHTML = marked.parse(text, { gfm: true, breaks: false, headerIds: true });
+
+      // Remove previous final-project class
+      mdContent.classList.remove("final-project");
+
+      // If Final Project, add special class to first H1
+      if (isFinalProject) {
+        const h1 = mdContent.querySelector('h1');
+        if (h1) h1.classList.add('final-project');
+
+        // Add modal animation class for glowing effect
+        mdContent.classList.add('final-project');
+      }
+
+      modal.style.display = 'flex';
+    } catch (err) {
+      mdContent.innerHTML = `<p style="color:red;">Error loading file: ${err}</p>`;
+      modal.style.display = 'flex';
+    }
+  }
+
+  function closeModal() {
+    modal.style.display = 'none';
+    mdContent.innerHTML = 'Loading...';
+    
+  }
+
+  // Close modal when clicking outside content
+  modal.addEventListener('click', e => {
+    if (e.target === modal) closeModal();
+  });
+
+  // Attach markdown loader to all checkpoint links
+  document.querySelectorAll('.load-md').forEach(link => {
+    link.addEventListener('click', e => {
+      e.preventDefault();
+      loadMarkdown(link.dataset.md);
+    });
+  });
+</script>
+</body>
+</html>
