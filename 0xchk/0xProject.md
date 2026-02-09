@@ -1,4 +1,4 @@
-# ⚙️ GRAND PROJECT — C++ MALWARE ANALYSIS SIMULATOR
+# ⚙️ HexHound — C++ MALWARE ANALYSIS SIMULATOR
 
 ## ⁉️ Project Title  
 
