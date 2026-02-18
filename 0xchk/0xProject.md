@@ -1,7 +1,7 @@
-# 🏗️ ByteHawk: A Lightweight Linux Process Monitor
+# 🏗️ HawkPro: A Lightweight Linux Process Monitor
 ![Language](https://img.shields.io/badge/Language-C%2B%2B-blue?logo=c%2B%2B) ![Standard](https://img.shields.io/badge/C%2B%2B-11%2B-blueviolet?logo=c%2B%2B) ![OS](https://img.shields.io/badge/OS-Linux-black?logo=linux) ![Data Source](https://img.shields.io/badge/Data-%2Fproc-critical?logo=linux) ![Build](https://img.shields.io/badge/build-g%2B%2B-success?logo=gnu) ![Interface](https://img.shields.io/badge/Interface-Terminal-darkgreen?logo=gnubash) ![Kernel](https://img.shields.io/badge/Kernel-Linux%20Userspace-yellow?logo=linux) ![Monitoring](https://img.shields.io/badge/Type-System%20Monitor-red?logo=htop)
 
-**ByteHawk** is a lightweight, terminal-based Linux system monitor written in **C++**, inspired by `top` and `htop` but intentionally kept simple for learning. It reads live system and process data from the **`/proc` filesystem** and displays it in the terminal, focusing on core C++ fundamentals rather than full feature parity.
+**HawkPro** is a lightweight, terminal-based Linux system monitor written in **C++**, inspired by `top` and `htop` but intentionally kept simple for learning. It reads live system and process data from the **`/proc` filesystem** and displays it in the terminal, focusing on core C++ fundamentals rather than full feature parity.
 
 ## 🎯 Project Goals
 
@@ -105,19 +105,20 @@ ByteHawk/
 
 This project is licensed under **Apache License** for educational purposes. Free to use, modify, and learn from.
 
-## 🧩 ASCII art
-```
- /$$              /$$$$$$$              /$$               /$$   /$$                         /$$      
-|  $$            | $$__  $$            | $$              | $$  | $$                        | $$      
- \  $$           | $$  \ $$ /$$   /$$ /$$$$$$    /$$$$$$ | $$  | $$  /$$$$$$  /$$  /$$  /$$| $$   /$$
-  \  $$          | $$$$$$$ | $$  | $$|_  $$_/   /$$__  $$| $$$$$$$$ |____  $$| $$ | $$ | $$| $$  /$$/
-   /$$/          | $$__  $$| $$  | $$  | $$    | $$$$$$$$| $$__  $$  /$$$$$$$| $$ | $$ | $$| $$$$$$/ 
-  /$$/           | $$  \ $$| $$  | $$  | $$ /$$| $$_____/| $$  | $$ /$$__  $$| $$ | $$ | $$| $$_  $$ 
- /$$/            | $$$$$$$/|  $$$$$$$  |  $$$$/|  $$$$$$$| $$  | $$|  $$$$$$$|  $$$$$/$$$$/| $$ \  $$
-|__//$$$$$$      |_______/  \____  $$   \___/   \_______/|__/  |__/ \_______/ \_____/\___/ |__/  \__/
-   |______/                 /$$  | $$                                                                
-                           |  $$$$$$/                                                                
-                            \______/                                                                 
-
+## 🧩 UI Design
+``` 
++-----------------------------------------------------------------------------------------------+
+| os-release                           HawkPro                                           Uptime |
++-----------------------------------------------------------------------------------------------|
+| CPU Info      | CPU Usage: <total %>  | Memory Usage: <total %> | Total Disk: < Disk Size> GB |
+| Memory Info   | Sys: <Sys %>          | Size: <Mem size> GB     | Available: <Avail Disk> GB  |
+| Disk Info     | User: <User %>        | Used: <Mem used> GB     | Network: <Net Mbps>         |
+| #Tasks        | Idle: <CPU Idle %>    | Free: <Mem free> GB     | IP: <ip addr>               |
+|===============================================================================================|
+| PID      USER(sort)      %CPU(sort)   %MEM(sort)   STATE   TIME+     COMMAND                  |
+| 1234     root            1.2          0.5          S       00:01     bash                     |
+| 5678     user            2.5          1.0          R       00:12     vim                      |
+| ...      ...             ...          ...          ...      ...      ...                      |
++-----------------------------------------------------------------------------------------------+
 ```
 
