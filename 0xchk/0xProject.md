@@ -124,3 +124,12 @@ hawkpro/
 
 ```
 
+## 🎯 Goals
+| Day | Goal | What to Build | Files to Touch |
+|-----|----------------------------------|------------------------------------------------------------|------------------------------------------------------------------------------|
+| 1   | Project skeleton + system basics | CMake setup, app loop, OS name, uptime                     | CMakeLists.txt, main.cpp, include/system/os.hpp, src/system/os.cpp, uptime.* |
+| 2   | CPU + Memory stats               | Total CPU %, Mem total/used/free                           | cpu.hpp/cpp, memory.hpp/cpp, types.hpp |
+| 3   | Disk + Network + Tasks           | Disk size/free, Net Mbps (delta), task count               | disk.hpp/cpp, network.hpp/cpp |
+| 4   | Process engine                   | Read /proc, %CPU calc, sorting, data model                 | process.hpp/cpp, proc_reader.hpp/cpp |
+| 5   | UI + Input                       | sec1/sec2 layout, colors, scrolling, sorting clicks, ↑ ↓ q | ui/screen.*, layout.*, header.*, table.*, input.* |
+
