@@ -3,6 +3,12 @@
 
 **HawkPro** is a lightweight, terminal-based Linux system monitor written in **C++**, inspired by `top` and `htop` but intentionally kept simple for learning. It reads live system and process data from the **`/proc` filesystem** and displays it in the terminal, focusing on core C++ fundamentals rather than full feature parity. [Link to 0xProject.md](https://github.com/3rr0r-505/Forge-CPP/blob/main/0xchk/0xProject.md)
 
+## 📑 Contents
+- [Project Goals](#-project-goals)
+- [Features](#-features-planned--implemented)
+- [UI Design](#-ui-design)
+- [Project Structure](#-project-structure)
+
 ## 🎯 Project Goals
 
 - Learn core **C++ basics** through a real Linux system project
